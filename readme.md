@@ -1,17 +1,17 @@
-# somebody-weibo
+# new-weibo-crawler
 
 1. 采用爬虫模拟登录微博
 
-2. 抓取somebody的最新"微博"和"赞"
+2. 抓取某人的最新"微博"和"赞"
 
 3. 发送最"微博"和"赞"博到指定的邮箱
 
 ## Download
 
-  下载 somebody-weibo 模块：
+  下载 new-weibo-crawler 模块：
 
 `
-$ git clone https://github.com/fucaobao/somebody-weibo.git
+$ git clone https://github.com/fucaobao/new-weibo-crawler.git
 `
 
 ## Options
@@ -34,9 +34,7 @@ $ git clone https://github.com/fucaobao/somebody-weibo.git
 
 ## Bugs
 
-  1. 目前没有较好的算法获取最新更新的"微博"和"赞"，getNewWeibos和getNewZans方法需要重新修改
+  1. getNewWeibos和getNewLikes算法需要优化。
 
-  2. 抓取的转发微博中，只包括自己所写的那一部分，下面的转发微博暂时没有，有待改善解析方法。
-
-  3. 在某些特殊情况下，抓取页面会失败，有待优化。
+  2. 运行时间较长后，Cookie可能会失效，需要重新生成。
 
