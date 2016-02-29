@@ -1,0 +1,31 @@
+{
+  "name": "new-weibo-crawler",
+  "version": "1.0.0",
+  "description": "定时获取某人的微博最新信息，并且发送到指定邮箱",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "fucaobao",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "nodemailer": "^2.2.1",
+    "request": "^2.69.0",
+    "winston": "^2.1.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fucaobao/new-weibo-crawler.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fucaobao/new-weibo-crawler/issues"
+  },
+  "homepage": "https://github.com/fucaobao/new-weibo-crawler#readme",
+  "keywords": [
+    "weibo",
+    "email"
+  ]
+}
