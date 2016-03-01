@@ -1,6 +1,5 @@
 var request = require('request');
 var cheerio = require('cheerio');
-var zlib = require('zlib');
 var log = require('./lib/log'); 					//日志系统
 var util = require('./lib/util');
 var mail = require('./lib/mail');
@@ -25,37 +24,14 @@ var currentLikes = {
 
 setInterval(function() {
 	var url = util.getOrigin(config.url);
-	requestFunc(url, parseWeibo); 					//解析somebody的微博主页
-	requestFunc(url + '/like', parseLike); 			//解析somebody的赞
+    util.request({
+        url: url
+    }, parseWeibo);                                 //解析somebody的微博主页
+    util.request({
+        url: url + '/like'
+    }, parseLike);                                  //解析somebody的赞
 }, config.interval);
 
-/**
- * 请求方法
- */
-function requestFunc(url, callback) {
-    request({
-        url: url,
-        headers: config.headers,
-        timeout: 15000,
-        encoding: null
-    }, function(error, response, data) {
-        if (!error && response.statusCode == 200) {
-            var buffer = new Buffer(data);
-            var encoding = response.headers['content-encoding'];
-            if (encoding == 'gzip') {
-                zlib.gunzip(buffer, function(err, decoded) {
-                    callback(err && ('unzip error' + err), decoded && decoded.toString());
-                });
-            } else if (encoding == 'deflate') {
-                zlib.inflate(buffer, function(err, decoded) {
-                    callback(err && ('deflate error' + err), decoded && decoded.toString());
-                });
-            } else {
-                callback(null, buffer.toString());
-            }
-        }
-    });
-}
 /**
  * 获取微博名
  */
@@ -122,7 +98,7 @@ function diffWeibos() {
     }
     //第一次抓取，则发送
     if (!preWeibos.id.length) {
-        return true;
+        return false;
     }
     if (preWeibos.id.toString() == currentWeibos.id.toString()) {
         return false;
@@ -192,7 +168,7 @@ function diffLikes() {
     }
     //第一次抓取，不发送
     if (!preLikes.id.length) {
-        return true;
+        return false;
     }
     if (preLikes.id.toString() === currentLikes.id.toString()) {
         return false;
